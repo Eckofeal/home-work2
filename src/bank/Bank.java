@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 public class Bank {
 
-    public static int count;
+    public static int count = 0;
 
     private Currency usd;
     private Currency eur;
@@ -135,8 +135,7 @@ public class Bank {
         if (creditTypeList != null) {
             if (indexOfCreditType(creditTypeList, creditType) == -1) {
                 creditTypeList = add(creditTypeList, creditType);
-            }
-            else {
+            } else {
                 System.out.println("Credit type already exist.");
             }
         } else {
@@ -150,9 +149,8 @@ public class Bank {
         }
         if (creditTypeList == null || creditTypeList.length == 0) {
             return;
-        } else {
-            creditTypeList = remove(creditTypeList, creditType);
         }
+        creditTypeList = remove(creditTypeList, creditType);
     }
 
     //OVERLOADED 1
@@ -207,9 +205,8 @@ public class Bank {
         }
         if (creditList == null || creditList.length == 0) {
             return;
-        } else {
-            creditList = remove(creditList, credit);
         }
+        creditList = remove(creditList, credit);
     }
 
     //OVERLOADED 2
@@ -245,8 +242,7 @@ public class Bank {
                     returnList = add(returnList, element);
                 }
             }
-        }
-        else {
+        } else {
             return null;
         }
         return returnList;
@@ -294,8 +290,7 @@ public class Bank {
         if (creditTypeList == null) {
             returnList = new CreditType[1];
             returnList[0] = creditType;
-        }
-        else {
+        } else {
             returnList = new CreditType[creditTypeList.length + 1];
             returnList = copyThenInsert(creditTypeList, returnList, creditType);
         }
@@ -316,11 +311,10 @@ public class Bank {
     }
 
     private CreditType[] copyThenInsert(CreditType[] copyThis, CreditType[] intoThis, CreditType thenInsertThis) {
-        for(int i = 0; i < intoThis.length; i++) {
-            if(i != intoThis.length-1) {
+        for (int i = 0; i < intoThis.length; i++) {
+            if (i != intoThis.length - 1) {
                 intoThis[i] = copyThis[i];
-            }
-            else {
+            } else {
                 intoThis[i] = thenInsertThis;
             }
         }
@@ -355,8 +349,7 @@ public class Bank {
         if (creditList == null) {
             returnList = new Credit[1];
             returnList[0] = credit;
-        }
-        else {
+        } else {
             returnList = new Credit[creditList.length + 1];
             returnList = copyThenInsert(creditList, returnList, credit);
         }
@@ -377,11 +370,10 @@ public class Bank {
     }
 
     private Credit[] copyThenInsert(Credit[] copyThis, Credit[] intoThis, Credit thenInsertThis) {
-        for(int i = 0; i < intoThis.length; i++) {
-            if(i != intoThis.length-1) {
+        for (int i = 0; i < intoThis.length; i++) {
+            if (i != intoThis.length - 1) {
                 intoThis[i] = copyThis[i];
-            }
-            else {
+            } else {
                 intoThis[i] = thenInsertThis;
             }
         }

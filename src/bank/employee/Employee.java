@@ -1,4 +1,5 @@
 package bank.employee;
+
 import bank.currency.Currency;
 import work.Work;
 
@@ -7,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 
 public class Employee {
 
-    public static int сount;
+    public static int сount = 0;
 
     private String firstName;
     private String lastName;
@@ -21,7 +22,7 @@ public class Employee {
         this.lastName = lastName;
         this.birthday = birthDay;
         int age = (int) ChronoUnit.YEARS.between(this.birthday, LocalDateTime.now());
-        if(age > 18 && age < 150) {
+        if (age > 18 && age < 150) {
             this.age = age;
         }
         this.position = position;
@@ -34,7 +35,7 @@ public class Employee {
     }
 
     public String getFirstName() {
-        return  firstName;
+        return firstName;
     }
 
     public void setLastName(String lastName) {
@@ -46,7 +47,7 @@ public class Employee {
     }
 
     public void setAge(int age) {
-        if(age > 18 && age < 150) {
+        if (age > 18 && age < 150) {
             this.age = age;
         }
     }
@@ -56,7 +57,7 @@ public class Employee {
     }
 
     public void setBirthday(LocalDateTime birthday) {
-            this.birthday = birthday;
+        this.birthday = birthday;
     }
 
     public LocalDateTime getBirthday() {
@@ -64,7 +65,7 @@ public class Employee {
     }
 
     public void setSalary(Currency salary) {
-            this.salary = salary;
+        this.salary = salary;
     }
 
     public Currency getSalary() {
@@ -72,7 +73,7 @@ public class Employee {
     }
 
     public void setPosition(String position) {
-            this.position = position;
+        this.position = position;
     }
 
     public String getPosition() {

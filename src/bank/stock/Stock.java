@@ -1,4 +1,5 @@
 package bank.stock;
+
 import bank.currency.Currency;
 
 public class Stock {

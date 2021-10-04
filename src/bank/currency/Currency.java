@@ -11,12 +11,12 @@ public class Currency {
     private double amount;
 
     public Currency(double moneyAmount, String moneyType) {
-            this.amount = moneyAmount;
-            this.type = moneyType;
+        this.amount = moneyAmount;
+        this.type = moneyType;
     }
 
     public void setAmount(double moneyAmount) {
-        this.amount = amount;
+        this.amount = moneyAmount;
     }
 
     public double getAmount() {
@@ -24,7 +24,7 @@ public class Currency {
     }
 
     public void setType(String moneyType) {
-            this.type = moneyType;
+        this.type = moneyType;
     }
 
     public String getType() {

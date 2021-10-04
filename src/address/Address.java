@@ -1,6 +1,7 @@
 package address;
 
 public class Address {
+
     private String сity;
     private String street;
     private int houseNumber;

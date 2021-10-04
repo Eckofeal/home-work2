@@ -1,11 +1,13 @@
 package сlient;
+
 import work.*;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class Client {
 
-    public static int сount;
+    public static int сount = 0;
 
     private String firstName;
     private String lastName;
@@ -18,7 +20,7 @@ public class Client {
         this.lastName = lastName;
         this.birthday = birthDay;
         int age = (int) ChronoUnit.YEARS.between(this.birthday, LocalDateTime.now());
-        if(age > 18 && age < 150) {
+        if (age > 18 && age < 150) {
             this.age = age;
         }
         this.work = work;
@@ -30,7 +32,7 @@ public class Client {
     }
 
     public String getFirstName() {
-        return  firstName;
+        return firstName;
     }
 
     public void setLastName(String lastName) {
@@ -42,7 +44,7 @@ public class Client {
     }
 
     public void setAge(int age) {
-        if(age > 18 && age < 150) {
+        if (age > 18 && age < 150) {
             this.age = age;
         }
     }

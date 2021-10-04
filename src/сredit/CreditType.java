@@ -2,7 +2,7 @@ package сredit;
 
 public class CreditType {
 
-    public static int count;
+    public static int count = 0;
 
     private String creditName;
     private String moneyType;
@@ -27,7 +27,7 @@ public class CreditType {
     }
 
     public String getCreditName() {
-        return  creditName;
+        return creditName;
     }
 
     public void setMoneyType(String moneyType) {
@@ -74,6 +74,6 @@ public class CreditType {
         System.out.println("Credit " + creditName + " from "
                 + minMoneyAmount + " " + moneyType + " to "
                 + maxMoneyAmount + " " + moneyType + " for a period of "
-                + termInYears + " years at " + yearPercent +"% per year.");
+                + termInYears + " years at " + yearPercent + "% per year.");
     }
 }

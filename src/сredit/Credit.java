@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Credit {
 
-    public static int сount;
+    public static int сount = 0;
 
     private Client client;
     private CreditType creditType;
@@ -32,8 +32,7 @@ public class Credit {
             whenExpired.setTime(whenIssued.getTime());
             whenExpired.setYear(whenExpired.getYear() + creditType.getTermInYears());
             сount++;
-        }
-        else {
+        } else {
             this.client = null;
             this.creditType =  null;
             System.out.println("Incorrect amount of money in \"new Credit()\".");

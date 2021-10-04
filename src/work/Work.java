@@ -50,7 +50,7 @@ public class Work {
         return moneyType;
     }
 
-    public void printWork(){
+    public void printWork() {
         System.out.println("Work: ");
         System.out.printf("%7s%-12s%s%n", "", "Company: ", companyName);
         System.out.printf("%7s%-12s%s%n", "", "Position: ", positionName);
