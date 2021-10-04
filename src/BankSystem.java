@@ -1,51 +1,96 @@
-import Bank.*;
-import Bank.currencies.*;
-import Client.Client;
-import Credit.*;
-import Work.Work;
+import adress.Adress;
+import bank.*;
+import bank.currency.Currency;
+import bank.employee.Employee;
+import сlient.Client;
+import сredit.*;
+import work.Work;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.ArrayList;
 
+//ARRAY
 public class BankSystem {
-    //imagine that the exchange rates are the same and unchanged in all banks
-    private final static double USDBUY;
-    private final static double USDSELL;
-    private final static double EUROBUY;
-    private final static double EUROSELL;
-    private final static double RUBBUY;
-    private final static double RUBSELL;
-    ArrayList<Bank> bankList;
-    static {
-        USDBUY = 2.495;
-        USDSELL = 2.515;
-        EUROBUY = 2.9;
-        EUROSELL = 2.912;
-        RUBBUY = 3.42;
-        RUBSELL = 3.46;
-    }
+
+    private final static double USDBUY = 2.495;
+    private final static double USDSELL = 2.515;
+    private final static double EUROBUY = 2.9;
+    private final static double EUROSELL = 2.912;
+    private final static double RUBBUY = 3.42;
+    private final static double RUBSELL = 3.46;
+
+    private Bank[] bankList;
 
     public BankSystem() {
-        bankList = new ArrayList<>();
+        bankList = new Bank[0];
     }
 
-    public void setBankList(ArrayList<Bank> bankList) {
-        if(bankList != null) this.bankList = bankList;
+    public void setBankList(Bank[] bankList) {
+        if(bankList != null) {
+            this.bankList = bankList;
+        }
     }
 
-    public ArrayList<Bank> getBankList() {
+    public Bank[] getBankList() {
         return bankList;
     }
 
     public void addBank(Bank bank){
         if (bank == null) return;
 
-            if (bankList.indexOf(bank) == -1) {
-                bankList.add(bank);
-            } else {
+            if (indexOfBank(bankList, bank) == -1) {
+                bankList = add(bankList, bank);
+            }
+            else {
                 System.out.println("Bank.Bank already exist.");
                 return;
             }
+    }
+
+    public int indexOfBank(Bank[] bankList, Bank bank) {
+        int result = -1;
+        if(bankList == null) {
+            result = -1;
+        }
+        if(bankList.length != 0 ) {
+            int flag = 0;
+            for (int i = 0; i < bankList.length; i++) {
+                flag++;
+                if(bankList[i].equals(bank)) {
+                    result = i;
+                    return result;
+                }
+            }
+            if(flag == bankList.length) {
+                result = -1;
+            }
+        }
+        else {
+            result = -1;
+        }
+        return result;
+    }
+
+    public Bank[] add(Bank[] bankList, Bank bank) {
+        if(bank == null) {
+            return  bankList;
+        }
+        Bank[] returnList;
+        if(bankList == null) {
+            returnList = new Bank[1];
+            returnList[0] = bank;
+        }
+        else {
+            returnList = new Bank[bankList.length+1];
+            for(int i = 0; i < returnList.length; i++) {
+                if(i != returnList.length-1) {
+                    returnList[i] = bankList[i];
+                }
+                else {
+                    returnList[i] = bank;
+                }
+            }
+        }
+        return returnList;
     }
 
     public static void exchangeRates() {
@@ -58,23 +103,24 @@ public class BankSystem {
 
     public static void info() {
         System.out.printf("%-60s%s%s", "\n", "BANK SYSTEM INFORMATION:", "\n");
-        System.out.println("Number of banks in system: " + Bank.bankCount);
-        System.out.println("Credits issued: " + Credit.creditCount);
-        System.out.println("Number types of credits in banks: " + CreditType.creditTypeCount);
-        System.out.println("Number of bank clients: " + Client.clientCount);
+        System.out.println("Number of banks in system: " + Bank.count);
+        System.out.println("Number of employees: " + Employee.сount);
+        System.out.println("Credits issued: " + Credit.сount);
+        System.out.println("Number types of credits in banks: " + CreditType.count);
+        System.out.println("Number of bank clients: " + Client.сount);
     }
-    //OVERLOADED 5
+    //OVERLOADED 3
     public void searchForCreditType(String moneyType) {
         System.out.printf("%-60s%s%s", "\n", "CREDIT SEARCH RESULT:", "\n");
         if (moneyType.isEmpty()) {
             System.out.println("No credits found for your request.");
         }
         else if(moneyType == "BYN" || moneyType == "RUB" || moneyType == "USD" || moneyType == "EUR") {
-            if(!bankList.isEmpty()) {
+            if(bankList.length != 0) {
                 for(Bank element : bankList) {
-                    if(element.findCreditType(moneyType) != null && element.findCreditType(moneyType).size() != 0) {
+                    if(element.findCreditType(moneyType) != null && element.findCreditType(moneyType).length != 0) {
                         for(CreditType creditTypeElement : element.findCreditType(moneyType)) {
-                            System.out.print("Bank \"" + element.getNameOfBank() + "\" : ");
+                            System.out.print("Bank \"" + element.getName() + "\" : ");
                             creditTypeElement.printCreditType();
                         }
                     }
@@ -88,19 +134,19 @@ public class BankSystem {
             System.out.println("No credits found for your request.");
         }
     }
-    //OVERLOADED 5
+    //OVERLOADED 3
     public void searchForCreditType(String moneyType, double moneyAmount) {
         System.out.printf("%-60s%s%s", "\n", "CREDIT SEARCH RESULT:", "\n");
         if (moneyType.isEmpty() || moneyAmount == 0) {
             System.out.println("No credits found for your request.");
         }
         else if(moneyType == "BYN" || moneyType == "RUB" || moneyType == "USD" || moneyType == "EUR") {
-            if(!bankList.isEmpty()) {
+            if(bankList.length != 0) {
                 int flag = 0;
                 for(Bank element : bankList) {
-                    if(element.findCreditType(moneyType, moneyAmount) != null && element.findCreditType(moneyType, moneyAmount).size() != 0) {
+                    if(element.findCreditType(moneyType, moneyAmount) != null && element.findCreditType(moneyType, moneyAmount).length != 0) {
                         for(CreditType creditTypeElement : element.findCreditType(moneyType, moneyAmount)) {
-                            System.out.print("Bank \"" + element.getNameOfBank() + "\" : ");
+                            System.out.print("Bank \"" + element.getName() + "\" : ");
                             creditTypeElement.printCreditType();
                         }
                     }
@@ -108,7 +154,9 @@ public class BankSystem {
                        flag++;
                     }
                 }
-                if(flag == bankList.size()) System.out.println("No credits found for your request.");
+                if(flag == bankList.length) {
+                    System.out.println("No credits found for your request.");
+                }
             }
             else {
                 System.out.println("No credits found for your request.");
@@ -120,62 +168,66 @@ public class BankSystem {
     }
 
     public static void main(String[] args) {
-        Byn byn1 = new Byn(1000000);
-        Rub rub1 = new Rub(1250000);
-        Euro eur1 = new Euro(150000);
-        Usd usd1 = new Usd(175000);
-        Byn byn2 = new Byn(2000000);
-        Euro eur2 = new Euro(250000);
-        Usd usd2 = new Usd(275000);
-        Rub rub2 = new Rub(2250000);
-        Byn byn3 = new Byn(3000000);
-        Rub rub3 = new Rub(3250000);
-        Euro eur3 = new Euro(350000);
-        Usd usd3 = new Usd(375000);
-        Byn byn4 = new Byn(4000000);
-        Rub rub4 = new Rub(4250000);
-        Euro eur4 = new Euro(450000);
-        Usd usd4 = new Usd(475000);
-        Bank bank1 = new Bank("Commercial Banking",
+        Currency byn1 = new Currency(1000000, Currency.BYN);
+        Currency rub1 = new Currency(1250000, Currency.RUB);
+        Currency eur1 = new Currency(150000, Currency.EURO);
+        Currency usd1 = new Currency(175000, Currency.USD);
+        Currency byn2 = new Currency(2000000, Currency.BYN);
+        Currency eur2 = new Currency(250000, Currency.EURO);
+        Currency usd2 = new Currency(275000, Currency.USD);
+        Currency rub2 = new Currency(2250000, Currency.RUB);
+        Currency byn3 = new Currency(3000000, Currency.BYN);
+        Currency rub3 = new Currency(3250000, Currency.RUB);
+        Currency eur3 = new Currency(350000, Currency.EURO);
+        Currency usd3 = new Currency(375000, Currency.USD);
+        Currency byn4 = new Currency(4000000, Currency.BYN);
+        Currency rub4 = new Currency(4250000, Currency.RUB);
+        Currency eur4 = new Currency(450000, Currency.EURO);
+        Currency usd4 = new Currency(475000, Currency.USD);
+        Adress adr1 = new Adress("Minsk", "Lenina", 3);
+        Adress adr2 = new Adress("Moscow", "Old Arbat", 12);
+        Adress adr3 = new Adress("London", "Piccadilly", 7);
+        Adress adr4 = new Adress("Berlin", "Unter den Linden", 9);
+        Bank bank1 = new Bank("Commercial Banking", adr1,
                 LocalDateTime.of(2017, Month.JULY, 9, 12, 0), usd1, eur1, rub1, byn1);
-        Bank bank2 = new Bank("Finance",
+        Bank bank2 = new Bank("Finance", adr2,
                 LocalDateTime.of(2000, Month.AUGUST, 26, 0, 0), usd2, eur2, rub2, byn2);
-        Bank bank3 = new Bank("Future's",
+        Bank bank3 = new Bank("Future's", adr3,
                 LocalDateTime.of(1993, Month.MAY, 3, 18, 6), usd2, eur2, rub2, byn2);
-        Bank bank4 = new Bank("Absolute",
+        Bank bank4 = new Bank("Absolute", adr4,
                 LocalDateTime.of(1886, Month.DECEMBER,31, 23, 59), usd3, eur3, rub3, byn3);
-        Work work1 = new Work("Google", "Sales Manager", 6500, Usd.MONEYTYPE);
-        Work work2 = new Work("KFC", "Restaurant Crew", 850, Byn.MONEYTYPE);
-        Work work3 = new Work("Adidas", "Production Line Engineer", 2800, Euro.MONEYTYPE);
+        Work work1 = new Work("Google", "Sales Manager", 6500, Currency.USD);
+        Work work2 = new Work("KFC", "Restaurant Crew", 850, Currency.BYN);
+        Work work3 = new Work("Adidas", "Production Line Engineer", 2800, Currency.EURO);
         Client client1 = new Client("Tom", "Fox",LocalDateTime.of(1990,Month.APRIL,5,10,15 ),work1);
         Client client2 = new Client("Alexa", "Dilan",LocalDateTime.of(1998,Month.SEPTEMBER,18,18,27 ),work2);
         Client client3 = new Client("Tom", "Fox",LocalDateTime.of(1984,Month.NOVEMBER,7,3,41 ),work3);
         CreditType creditType1 = new CreditType(
-                "Elementary USD", Usd.MONEYTYPE, 1, 12,1000, 2000);
+                "Elementary USD", Currency.USD, 1, 12,1000, 2000);
         CreditType creditType2 = new CreditType(
-                "Light USD", Usd.MONEYTYPE, 1, 9,2000, 5000);
+                "Light USD", Currency.USD, 1, 9,2000, 5000);
         CreditType creditType3 = new CreditType(
-                "Medium USD", Usd.MONEYTYPE, 2, 8,5000, 10000);
+                "Medium USD", Currency.USD, 2, 8,5000, 10000);
         CreditType creditType4 = new CreditType(
-                "High USD", Usd.MONEYTYPE, 3, 7,10000, 20000);
+                "High USD", Currency.USD, 3, 7,10000, 20000);
         CreditType creditType5 = new CreditType(
-                "Inescapable USD", Usd.MONEYTYPE, 5, 7,20000, 50000);
+                "Inescapable USD", Currency.USD, 5, 7,20000, 50000);
         CreditType creditType6 = new CreditType(
-                "Light EURO", Euro.MONEYTYPE, 2, 17,1000, 6000);
+                "Light EURO", Currency.EURO, 2, 17,1000, 6000);
         CreditType creditType7 = new CreditType(
-                "Medium EURO", Euro.MONEYTYPE, 2, 14,6000, 15000);
+                "Medium EURO", Currency.EURO, 2, 14,6000, 15000);
         CreditType creditType8 = new CreditType(
-                "High EURO", Euro.MONEYTYPE, 2, 11,15000, 30000);
+                "High EURO", Currency.EURO, 2, 11,15000, 30000);
         CreditType creditType9 = new CreditType(
-                "Light RUB", Rub.MONEYTYPE, 1, 25,70000, 210000);
+                "Light RUB", Currency.RUB, 1, 25,70000, 210000);
         CreditType creditType10 = new CreditType(
-                "Medium RUB", Rub.MONEYTYPE, 3, 23,210000, 400000);
+                "Medium RUB", Currency.RUB, 3, 23,210000, 400000);
         CreditType creditType11 = new CreditType(
-                "High RUB", Rub.MONEYTYPE, 5, 20,400000, 1000000);
+                "High RUB", Currency.RUB, 5, 20,400000, 1000000);
         CreditType creditType13 = new CreditType(
-                "Medium BYN", Byn.MONEYTYPE, 1, 8,20000, 50000);
+                "Medium BYN", Currency.BYN, 1, 8,20000, 50000);
         CreditType creditType14 = new CreditType(
-                "High BYN", Byn.MONEYTYPE, 2, 11,50000, 150000);
+                "High BYN", Currency.BYN, 2, 11,50000, 150000);
         bank1.addCreditType(creditType1);
         bank1.addCreditType(creditType2);
         bank1.addCreditType(creditType6);
@@ -206,19 +258,19 @@ public class BankSystem {
         bankSystem.addBank(bank4);
         //Home task call(Business question)
         bankSystem.searchForCreditType("USD");
-        bankSystem.searchForCreditType(Usd.MONEYTYPE, 1500);
-        bankSystem.searchForCreditType(Euro.MONEYTYPE, 300);
+        bankSystem.searchForCreditType(Currency.USD, 1500);
+        bankSystem.searchForCreditType(Currency.EURO, 300);
         bankSystem.searchForCreditType("qwe");
         bankSystem.searchForCreditType("123", 50000);
-        bankSystem.searchForCreditType(Usd.MONEYTYPE, 1500000);
+        bankSystem.searchForCreditType(Currency.USD, 1500000);
         //static call
         BankSystem.exchangeRates();
         //static call
         BankSystem.info();
         //search before CreditType remove
-        bankSystem.searchForCreditType(Byn.MONEYTYPE);
+        bankSystem.searchForCreditType(Currency.BYN);
         bank4.removeCreditType(creditType14);
         //search after CreditType remove
-        bankSystem.searchForCreditType(Byn.MONEYTYPE);
+        bankSystem.searchForCreditType(Currency.BYN);
     }
 }

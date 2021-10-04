@@ -1,20 +1,31 @@
-package Work;
+package work;
 
 public class Work {
+
     private String companyName;
     private String positionName;
     private int salary;
     private String moneyType;
 
     public Work(String companyName, String positionName, int salary, String moneyType) {
-        if (!companyName.isEmpty()) this.companyName = companyName;
-        if (!positionName.isEmpty()) this.positionName = positionName;
-        if (salary > 0) this.salary = salary;
-        if (moneyType == "BYN" || moneyType == "RUB" || moneyType == "EUR" || moneyType == "USD") this.moneyType = moneyType;
+        if (!companyName.isEmpty()) {
+            this.companyName = companyName;
+        }
+        if (!positionName.isEmpty()) {
+            this.positionName = positionName;
+        }
+        if (salary > 0) {
+            this.salary = salary;
+        }
+        if(!moneyType.isEmpty()) {
+            this.moneyType = moneyType;
+        }
     }
 
     public void setCompanyName(String companyName) {
-        if (!companyName.isEmpty()) this.companyName = companyName;
+        if (!companyName.isEmpty()) {
+            this.companyName = companyName;
+        }
     }
 
     public String getCompanyName() {
@@ -22,7 +33,9 @@ public class Work {
     }
 
     public void setPositionName(String positionName) {
-        if (!positionName.isEmpty()) this.positionName = positionName;
+        if (!positionName.isEmpty()) {
+            this.positionName = positionName;
+        }
     }
 
     public String getPositionName() {
@@ -30,7 +43,9 @@ public class Work {
     }
 
     public void setSalary(int salary) {
-        if (salary > 0) this.salary = salary;
+        if (salary > 0) {
+            this.salary = salary;
+        }
     }
 
     public int getSalary() {
@@ -38,7 +53,9 @@ public class Work {
     }
 
     public void setMoneyType(String moneyType) {
-        if (moneyType == "BYN" || moneyType == "RUB" || moneyType == "EUR" || moneyType == "USD") this.moneyType = moneyType;
+        if(moneyType.isEmpty()) {
+            this.moneyType = moneyType;
+        }
     }
 
     public String getMoneyType() {

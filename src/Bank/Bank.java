@@ -1,140 +1,207 @@
-package Bank;
-import Bank.currencies.*;
-import Credit.*;
-import Client.*;
+package bank;
+import adress.Adress;
+import bank.employee.Employee;
+import bank.stock.*;
+import сredit.*;
+import сlient.*;
+import bank.currency.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class Bank {
-    public static int bankCount;
-    private Usd usd;
-    private Euro eur;
-    private Rub rub;
-    private Byn byn;
-    private String nameOfBank;
-    private LocalDateTime whenFounded;
-    private ArrayList<CreditType> creditTypeList;
-    private ArrayList<Credit> creditList;
 
-    public Bank(String nameOfBank, LocalDateTime whenFounded) {
-        if (!nameOfBank.isEmpty()) this.nameOfBank = nameOfBank;
-        if(whenFounded != null) this.whenFounded = whenFounded;
-        bankCount++;
+    public static int count;
+
+    private Currency usd;
+    private Currency eur;
+    private Currency rub;
+    private Currency byn;
+    private String name;
+    private Adress adress;
+    private LocalDateTime foundedAt;
+    private Stock[] stockList;
+    private Employee[] employees;
+    private CreditType[] creditTypeList;
+    private Credit[] creditList;
+
+    public Bank(String name, Adress adress, LocalDateTime foundedAt) {
+        if (!name.isEmpty()) {
+            this.name = name;
+        }
+        if(adress != null) {
+            this.adress = adress;
+        }
+        if(foundedAt != null) {
+            this.foundedAt = foundedAt;
+        }
+        count++;
     }
 
-    public Bank(String nameOfBank,LocalDateTime whenFounded, Usd usd, Euro eur, Rub rub, Byn byn) {
-        this(nameOfBank, whenFounded);
-        if (usd != null) this.usd = usd;
-        if (eur != null) this.eur = eur;
-        if (rub != null) this.rub = rub;
-        if (byn != null) this.byn = byn;
+    public Bank(String nameOfBank, Adress adress, LocalDateTime whenFounded, Currency usd, Currency eur, Currency rub, Currency byn) {
+        this(nameOfBank, adress, whenFounded);
+        if (usd != null) {
+            this.usd = usd;
+        }
+        if (eur != null) {
+            this.eur = eur;
+        }
+        if (rub != null) {
+            this.rub = rub;
+        }
+        if (byn != null) {
+            this.byn = byn;
+        }
     }
 
-    public void setNameOfBank(String nameOfBank) {
-        if (!nameOfBank.isEmpty()) this.nameOfBank = nameOfBank;
+    public void setName(String name) {
+        if (!name.isEmpty()) {
+            this.name = name;
+        }
     }
 
-    public String getNameOfBank() {
-        return nameOfBank;
+    public String getName() {
+        return name;
     }
 
-    public void setWhenFounded(LocalDateTime whenFounded) {
-        if(whenFounded != null) this.whenFounded = whenFounded;
+    public void setAdress(Adress adress) {
+        if(adress != null) {
+            this.adress = adress;
+        }
     }
 
-    public LocalDateTime getWhenFounded() {
-        return whenFounded;
+    public Adress getAdress() {
+        return adress;
     }
 
-    public void setUsd(Usd usd) {
-        if (usd != null) this.usd = usd;
+    public void setFoundedAt(LocalDateTime foundedAt) {
+        if(foundedAt != null) {
+            this.foundedAt = foundedAt;
+        }
     }
 
-    public Usd getUsd() {
+    public LocalDateTime getFoundedAt() {
+        return foundedAt;
+    }
+
+    public void setUsd(Currency usd) {
+        if (usd != null) {
+            this.usd = usd;
+        }
+    }
+
+    public Currency getUsd() {
         return usd;
     }
 
-    public void setEur(Euro eur) {
-        if (eur != null) this.eur = eur;
+    public void setEur(Currency eur) {
+        if (eur != null) {
+            this.eur = eur;
+        }
     }
 
-    public Euro getEur() {
+    public Currency getEur() {
         return eur;
     }
 
-    public void setRub(Rub rub) {
-        if (rub != null) this.rub = rub;
+    public void setRub(Currency rub) {
+        if (rub != null) {
+            this.rub = rub;
+        }
     }
 
-    public Rub getRub() {
+    public Currency getRub() {
         return rub;
     }
 
-    public void setByn(Byn byn) {
-        if (byn != null) this.byn = byn;
+    public void setByn(Currency byn) {
+        if (byn != null) {
+            this.byn = byn;
+        }
     }
 
-    public Byn getByn() {
+    public Currency getByn() {
         return byn;
     }
 
-    public void setCreditList(ArrayList<Credit> creditList) {
-        if (creditList != null) this.creditList = creditList;
+    public void setStockList(Stock[] stockList) {
+        if(employees != null) {
+            this.stockList = stockList;
+        }
     }
 
-    public ArrayList<Credit> getCreditList() {
+    public Stock[] getStockList() {
+        return stockList;
+    }
+
+    public void setEmployees(Employee[] employees) {
+        if(employees != null) {
+            this.employees = employees;
+        }
+    }
+
+    public Employee[] getEmployees() {
+        return employees;
+    }
+
+    public void setCreditList(Credit[] creditList) {
+        if (creditList != null) {
+            this.creditList = creditList;
+        }
+    }
+
+    public Credit[] getCreditList() {
         return creditList;
     }
 
-    public void setCreditTypeList(ArrayList<CreditType> creditTypeList) {
-        if (creditTypeList != null) this.creditTypeList = creditTypeList;
+    public void setCreditTypeList(CreditType[] creditTypeList) {
+        if (creditTypeList != null) {
+            this.creditTypeList = creditTypeList;
+        }
     }
 
-    public ArrayList<CreditType> getCreditTypeList() {
+    public CreditType[] getCreditTypeList() {
         return creditTypeList;
     }
 
     public void addCreditType(CreditType creditType) {
-        if (creditType == null) return;
+        if (creditType == null) {
+            return;
+        }
         if (creditTypeList != null) {
-            if (creditTypeList.indexOf(creditType) == -1) {
-                creditTypeList.add(creditType);
+            if (indexOfCreditType(creditTypeList, creditType) == -1) {
+                creditTypeList = add(creditTypeList, creditType);
             } else {
                 System.out.println("Credit.Credit type already exist.");
                 return;
             }
         } else {
-            creditTypeList = new ArrayList<CreditType>();
-            creditTypeList.add(creditType);
+            creditTypeList = add(creditTypeList, creditType);
         }
     }
 
-    //OVERLOADED 1
     public void removeCreditType(CreditType creditType) {
-        if (creditType == null) return;
-        if (creditTypeList == null || creditTypeList.size() == 0) return;
+        if (creditType == null) {
+            return;
+        }
+        if (creditTypeList == null || creditTypeList.length == 0) {
+            return;
+        }
         else {
-            int index = creditTypeList.indexOf(creditType);
-            if (index == -1) return;
-            else creditTypeList.remove(index);
+           creditTypeList = remove(creditTypeList, creditType);
         }
     }
-
-    //OVERLOAD 1
-    public void removeCreditType(int index) {
-        if (creditTypeList == null || creditTypeList.size() == 0) return;
-        else creditTypeList.remove(index);
-    }
-
-    //OVERLOADED 2
-    public ArrayList<CreditType> findCreditType(String moneyType) {
-        ArrayList<CreditType> returnList;
-        if (moneyType.isEmpty()) return null;
+    //OVERLOADED 1
+    public CreditType[] findCreditType(String moneyType) {
+        CreditType[] returnList;
+        if (moneyType.isEmpty()) {
+            return null;
+        }
         else {
-            if (creditTypeList != null && creditTypeList.size() > 0) {
-                returnList = new ArrayList<CreditType>();
+            if (creditTypeList != null && creditTypeList.length > 0) {
+                returnList = new CreditType[0];
                 for (CreditType element : creditTypeList) {
-                    if (element.getMoneyType() == moneyType) returnList.add(element);
+                    if (element.getMoneyType() == moneyType) {
+                        returnList = add(returnList, element);
+                    }
                 }
             } else {
                 return null;
@@ -142,101 +209,27 @@ public class Bank {
         }
         return returnList;
     }
-
-    //OVERLOADED 2
-    public ArrayList<CreditType> findCreditType(String moneyType, double moneyAmount) {
-        ArrayList<CreditType> returnList;
-        if (moneyAmount <= 0) return null;
-        else if(moneyType.isEmpty()) return null;
+    //OVERLOADED 1
+    public CreditType[] findCreditType(String moneyType, double moneyAmount) {
+        CreditType[] returnList;
+        if (moneyAmount <= 0) {
+            return null;
+        }
+        else if(moneyType.isEmpty()) {
+            return null;
+        }
         else {
-            if (creditTypeList != null && creditTypeList.size() > 0) {
-                returnList = new ArrayList<CreditType>();
+            if (creditTypeList != null && creditTypeList.length > 0) {
+                returnList = new CreditType[0];
                 for (CreditType element : creditTypeList) {
                     if (element.getMoneyType() == moneyType &&
                             (moneyAmount >= element.getMinMoneyAmount() &&
-                                    moneyAmount <= element.getMaxMoneyAmount())) returnList.add(element);
+                                    moneyAmount <= element.getMaxMoneyAmount())) {
+                        returnList = add(returnList, element);
+                    }
                 }
-            } else {
-                return null;
             }
-        }
-        return returnList;
-    }
-
-    //OVERLOADED 2
-    public ArrayList<CreditType> findCreditType(Euro eur) {
-        ArrayList<CreditType> returnList;
-        if (eur == null) return null;
-        if (eur.getMoneyAmount() <= 0) return null;
-        else {
-            if (creditTypeList != null && creditTypeList.size() > 0) {
-                returnList = new ArrayList<CreditType>();
-                for (CreditType element : creditTypeList) {
-                    if (element.getMoneyType() == Euro.MONEYTYPE &&
-                            (eur.getMoneyAmount() >= element.getMinMoneyAmount() &&
-                                    eur.getMoneyAmount() <= element.getMaxMoneyAmount())) returnList.add(element);
-                }
-            } else {
-                return null;
-            }
-        }
-        return returnList;
-    }
-
-    //OVERLOADED 2
-    public ArrayList<CreditType> findCreditType(Usd usd) {
-        ArrayList<CreditType> returnList;
-        if (usd == null) return null;
-        if (usd.getMoneyAmount() <= 0) return null;
-        else {
-            if (creditTypeList != null && creditTypeList.size() > 0) {
-                returnList = new ArrayList<CreditType>();
-                for (CreditType element : creditTypeList) {
-                    if (element.getMoneyType() == Usd.MONEYTYPE &&
-                            (usd.getMoneyAmount() >= element.getMinMoneyAmount() &&
-                                    usd.getMoneyAmount() <= element.getMaxMoneyAmount())) returnList.add(element);
-                }
-            } else {
-                return null;
-            }
-        }
-        return returnList;
-    }
-
-    //OVERLOADED 2
-    public ArrayList<CreditType> findCreditType(Rub rub) {
-        ArrayList<CreditType> returnList;
-        if (rub == null) return null;
-        if (rub.getMoneyAmount() <= 0) return null;
-        else {
-            if (creditTypeList != null && creditTypeList.size() > 0) {
-                returnList = new ArrayList<CreditType>();
-                for (CreditType element : creditTypeList) {
-                    if (element.getMoneyType() == Rub.MONEYTYPE &&
-                            (rub.getMoneyAmount() >= element.getMinMoneyAmount() &&
-                                    rub.getMoneyAmount() <= element.getMaxMoneyAmount())) returnList.add(element);
-                }
-            } else {
-                return null;
-            }
-        }
-        return returnList;
-    }
-
-    //OVERLOADED 2
-    public ArrayList<CreditType> findCreditType(Byn byn) {
-        ArrayList<CreditType> returnList;
-        if (byn == null) return null;
-        if (byn.getMoneyAmount() <= 0) return null;
-        else {
-            if (creditTypeList != null && creditTypeList.size() > 0) {
-                returnList = new ArrayList<CreditType>();
-                for (CreditType element : creditTypeList) {
-                    if (element.getMoneyType() == Rub.MONEYTYPE &&
-                            (byn.getMoneyAmount() >= element.getMinMoneyAmount() &&
-                                    byn.getMoneyAmount() <= element.getMaxMoneyAmount())) returnList.add(element);
-                }
-            } else {
+            else {
                 return null;
             }
         }
@@ -244,47 +237,44 @@ public class Bank {
     }
 
     public void addCredit(Credit credit) {
-        if (credit == null) return;
+        if (credit == null) {
+            return;
+        }
         if (creditList != null) {
-            if (creditList.indexOf(credit) == -1) {
-                creditList.add(credit);
+            if (indexOfCredit(creditList, credit) == -1) {
+                creditList = add(creditList, credit);
             } else {
-                System.out.println("Credit.Credit already exist.");
+                System.out.println("Credit already exist.");
                 return;
             }
         } else {
-            creditList = new ArrayList<Credit>();
-            creditList.add(credit);
+            creditList = add(creditList, credit);
         }
     }
 
-    //OVERLOADED 3
     public void removeCredit(Credit credit) {
-        if (credit == null) return;
-        if (creditList == null || creditList.size() == 0) return;
+        if (credit == null) {
+            return;
+        }
+        if (creditList == null || creditList.length == 0) {
+            return;
+        }
         else {
-            int index = creditList.indexOf(credit);
-            if (index == -1) return;
-            else creditList.remove(index);
+            creditList = remove(creditList, credit);
         }
     }
-
-    //OVERLOADED 3
-    public void removeCredit(int index) {
-        if (creditList == null || creditList.size() == 0) return;
-        else creditList.remove(index);
-    }
-
-    //OVERLOADED 4
-    public ArrayList<Credit> findCredit(Client client) {
-        ArrayList<Credit> returnList;
-        if (client == null) return null;
-        if (creditList != null && creditList.size() > 0) {
-            returnList = new ArrayList<Credit>();
+    //OVERLOADED 2
+    public Credit[] findCredit(Client client) {
+        Credit[] returnList;
+        if (client == null) {
+            return null;
+        }
+        if (creditList != null && creditList.length > 0) {
+            returnList = new Credit[0];
             for (Credit element : creditList) {
                 if (element.getClient().getFirstName() == client.getFirstName() &&
                         element.getClient().getLastName() == client.getLastName()) {
-                    returnList.add(element);
+                    returnList = add(returnList, element);
                 }
             }
         } else {
@@ -292,15 +282,17 @@ public class Bank {
         }
         return returnList;
     }
-    //OVERLOADED 4
-    public ArrayList<Credit> findCredit(CreditType creditType) {
-        ArrayList<Credit> returnList;
-        if (creditType == null) return null;
-        if (creditList != null && creditList.size() > 0) {
-            returnList = new ArrayList<Credit>();
+    //OVERLOADED 2
+    public Credit[] findCredit(CreditType creditType) {
+        Credit[] returnList;
+        if (creditType == null) {
+            return null;
+        }
+        if (creditList != null && creditList.length > 0) {
+            returnList = new Credit[0];
             for (Credit element : creditList) {
                 if (element.getCreditType().getCreditName() == creditType.getCreditName()) {
-                    returnList.add(element);
+                    returnList = add(returnList, element);
                 }
             }
         } else {
@@ -311,14 +303,161 @@ public class Bank {
 
     public void printBankInformation() {
         System.out.printf("%-60s%s%s", "\n", "BANK ININFORMATION:", "\n");
-        System.out.println(nameOfBank + " founded in " + whenFounded.getDayOfMonth() + "." +
-                whenFounded.getMonth() + "." + whenFounded.getYear());
-        System.out.println("Number of credit types in bank :" + creditTypeList.size());
-        System.out.println("Number of credits issued :" + creditList.size());
+        System.out.println(name + ", located on " + adress.getSity() +
+                ", " + adress.getStreet() + " " + adress.getHouseNumber() + " street, founded in " +
+                foundedAt.getDayOfMonth() + "." + foundedAt.getMonth() + "." + foundedAt.getYear());
+        System.out.println("Number of credit types in bank: " + creditTypeList.length);
+        System.out.println("Number of credits issued: " + creditList.length);
         System.out.println("Bank capital:");
-        System.out.println(usd.getMoneyAmount() + " " + Usd.MONEYTYPE);
-        System.out.println(eur.getMoneyAmount() + " " + Euro.MONEYTYPE);
-        System.out.println(rub.getMoneyAmount() + " " + Rub.MONEYTYPE);
-        System.out.println(byn.getMoneyAmount() + " " + Byn.MONEYTYPE);
+        System.out.println(usd.getAmount() + " " + Currency.USD);
+        System.out.println(eur.getAmount() + " " + Currency.EURO);
+        System.out.println(rub.getAmount() + " " + Currency.RUB);
+        System.out.println(byn.getAmount() + " " + Currency.BYN);
+    }
+
+    public int indexOfCreditType(CreditType[] creditTypeList, CreditType creditType) {
+        int result = -1;
+        if(creditTypeList == null) {
+            result = -1;
+        }
+        if(creditTypeList.length != 0 ) {
+            int flag = 0;
+            for (int i = 0; i < creditTypeList.length; i++) {
+                flag++;
+                if(creditTypeList[i].equals(creditType)) {
+                    result = i;
+                    return result;
+                }
+            }
+            if(flag == creditTypeList.length) {
+                result = -1;
+            }
+        }
+        else {
+            result = -1;
+        }
+        return result;
+    }
+
+    public CreditType[] add(CreditType[] creditTypeList, CreditType creditType) {
+        if(creditType == null) {
+            return creditTypeList;
+        }
+        CreditType[] returnList;
+        if(creditTypeList == null) {
+            returnList = new CreditType[1];
+            returnList[0] = creditType;
+        }
+        else {
+            returnList = new CreditType[creditTypeList.length+1];
+            for(int i = 0; i < returnList.length; i++) {
+                if(i != returnList.length-1) {
+                    returnList[i] = creditTypeList[i];
+                }
+                else {
+                    returnList[i] = creditType;
+                }
+            }
+        }
+        return returnList;
+    }
+
+    public CreditType[] remove(CreditType[] creditTypeList, CreditType creditType) {
+        if(creditType == null) {
+            return creditTypeList;
+        }
+        CreditType[] returnList;
+        if(creditTypeList == null) {
+            return creditTypeList;
+        }
+        else if(creditTypeList.length == 0) {
+            return creditTypeList;
+        }
+        else {
+            returnList = new CreditType[creditTypeList.length-1];
+            int index = indexOfCreditType(creditTypeList, creditType);
+            for(int i = 0, j = 0; i < creditTypeList.length; i++, j++) {
+                if(i == index) {
+                    j--;
+                }
+                else {
+                    returnList[j] = creditTypeList[i];
+                }
+            }
+        }
+        return returnList;
+    }
+
+    public int indexOfCredit(Credit[] creditList, Credit credit) {
+        int result = -1;
+        if(creditList == null) {
+            result = -1;
+        }
+        if(creditList.length != 0 ) {
+            int flag = 0;
+            for (int i = 0; i < creditList.length; i++) {
+                flag++;
+                if(creditList[i].equals(credit)) {
+                    result = i;
+                    return result;
+                }
+            }
+            if(flag == creditList.length) {
+                result = -1;
+            }
+        }
+        else {
+            result = -1;
+        }
+        return result;
+    }
+
+    public Credit[] add(Credit[] creditList, Credit credit) {
+        if(credit == null) {
+            return creditList;
+        }
+        Credit[] returnList;
+        if(creditList == null) {
+            returnList = new Credit[1];
+            returnList[0] = credit;
+        }
+        else {
+            returnList = new Credit[creditList.length+1];
+            for(int i = 0; i < returnList.length; i++) {
+                if(i != returnList.length-1) {
+                    returnList[i] = creditList[i];
+                }
+                else {
+                    returnList[i] = credit;
+                }
+            }
+        }
+        return returnList;
+    }
+
+    public Credit[] remove(Credit[] creditList, Credit credit) {
+        if(credit == null) {
+            return creditList;
+        }
+        Credit[] returnList;
+        if(creditList == null) {
+            return creditList;
+        }
+        else if(creditList.length == 0) {
+            return creditList;
+        }
+        else {
+            returnList = new Credit[creditList.length-1];
+            int index = indexOfCredit(creditList, credit);
+            for(int i = 0, j = 0; i < creditList.length; i++, j++) {
+                if(i == index) {
+                    j--;
+                }
+                else {
+                    returnList[j] = creditList[i];
+                }
+            }
+        }
+        return returnList;
     }
 }
