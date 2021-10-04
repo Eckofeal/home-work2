@@ -152,7 +152,7 @@ public class Bank {
 
     //OVERLOADED 1
     public CreditType[] findCreditType(String moneyType) {
-        CreditType[] result;
+        CreditType[] result = null;
         if (creditTypes != null && creditTypes.length > 0) {
             result = new CreditType[0];
             for (CreditType element : creditTypes) {
@@ -160,15 +160,13 @@ public class Bank {
                     result = add(result, element);
                 }
             }
-        } else {
-            return null;
         }
         return result;
     }
 
     //OVERLOADED 1
     public CreditType[] findCreditType(String moneyType, double moneyAmount) {
-        CreditType[] result;
+        CreditType[] result = null;
         if (creditTypes != null && creditTypes.length > 0) {
             result = new CreditType[0];
             for (CreditType element : creditTypes) {
@@ -178,8 +176,6 @@ public class Bank {
                     result = add(result, element);
                 }
             }
-        } else {
-            return null;
         }
         return result;
     }
@@ -205,7 +201,7 @@ public class Bank {
 
     //OVERLOADED 2
     public Credit[] findCredit(Client client) {
-        Credit[] result;
+        Credit[] result = null;
         if (client == null) {
             return null;
         }
@@ -217,15 +213,13 @@ public class Bank {
                     result = add(result, element);
                 }
             }
-        } else {
-            return null;
         }
         return result;
     }
 
     //OVERLOADED 2
     public Credit[] findCredit(CreditType creditType) {
-        Credit[] result;
+        Credit[] result = null;
         if (creditType == null) {
             return null;
         }
@@ -236,8 +230,6 @@ public class Bank {
                     result = add(result, element);
                 }
             }
-        } else {
-            return null;
         }
         return result;
     }
