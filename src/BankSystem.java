@@ -1,4 +1,4 @@
-import adress.Adress;
+import adress.Address;
 import bank.*;
 import bank.currency.Currency;
 import bank.employee.Employee;
@@ -18,49 +18,49 @@ public class BankSystem {
     private final static double RUBBUY = 3.42;
     private final static double RUBSELL = 3.46;
 
-    private Bank[] bankList;
+    private Bank[] banks;
 
     public BankSystem() {
-        bankList = new Bank[0];
+        banks = new Bank[0];
     }
 
-    public void setBankList(Bank[] bankList) {
-        if(bankList != null) {
-            this.bankList = bankList;
+    public void setBanks(Bank[] banks) {
+        if(banks != null) {
+            this.banks = banks;
         }
     }
 
-    public Bank[] getBankList() {
-        return bankList;
+    public Bank[] getBanks() {
+        return banks;
     }
 
     public void addBank(Bank bank){
-        if (bank == null) return;
-
-            if (indexOfBank(bankList, bank) == -1) {
-                bankList = add(bankList, bank);
-            }
-            else {
-                System.out.println("Bank.Bank already exist.");
-                return;
-            }
+        if (bank == null) {
+            return;
+        }
+        if (indexOfBank(bank) == -1) {
+            banks = add(bank);
+        }
+        else {
+            System.out.println("Bank.Bank already exist.");
+        }
     }
 
-    public int indexOfBank(Bank[] bankList, Bank bank) {
+    private int indexOfBank(Bank bank) {
         int result = -1;
-        if(bankList == null) {
+        if(banks == null) {
             result = -1;
         }
-        if(bankList.length != 0 ) {
+        if(banks.length != 0 ) {
             int flag = 0;
-            for (int i = 0; i < bankList.length; i++) {
+            for (int i = 0; i < banks.length; i++) {
                 flag++;
-                if(bankList[i].equals(bank)) {
+                if(banks[i].equals(bank)) {
                     result = i;
                     return result;
                 }
             }
-            if(flag == bankList.length) {
+            if(flag == banks.length) {
                 result = -1;
             }
         }
@@ -70,20 +70,20 @@ public class BankSystem {
         return result;
     }
 
-    public Bank[] add(Bank[] bankList, Bank bank) {
+    private Bank[] add(Bank bank) {
         if(bank == null) {
-            return  bankList;
+            return  banks;
         }
         Bank[] returnList;
-        if(bankList == null) {
+        if(banks == null) {
             returnList = new Bank[1];
             returnList[0] = bank;
         }
         else {
-            returnList = new Bank[bankList.length+1];
+            returnList = new Bank[banks.length+1];
             for(int i = 0; i < returnList.length; i++) {
                 if(i != returnList.length-1) {
-                    returnList[i] = bankList[i];
+                    returnList[i] = banks[i];
                 }
                 else {
                     returnList[i] = bank;
@@ -116,8 +116,8 @@ public class BankSystem {
             System.out.println("No credits found for your request.");
         }
         else if(moneyType == "BYN" || moneyType == "RUB" || moneyType == "USD" || moneyType == "EUR") {
-            if(bankList.length != 0) {
-                for(Bank element : bankList) {
+            if(banks.length != 0) {
+                for(Bank element : banks) {
                     if(element.findCreditType(moneyType) != null && element.findCreditType(moneyType).length != 0) {
                         for(CreditType creditTypeElement : element.findCreditType(moneyType)) {
                             System.out.print("Bank \"" + element.getName() + "\" : ");
@@ -141,9 +141,9 @@ public class BankSystem {
             System.out.println("No credits found for your request.");
         }
         else if(moneyType == "BYN" || moneyType == "RUB" || moneyType == "USD" || moneyType == "EUR") {
-            if(bankList.length != 0) {
+            if(banks.length != 0) {
                 int flag = 0;
-                for(Bank element : bankList) {
+                for(Bank element : banks) {
                     if(element.findCreditType(moneyType, moneyAmount) != null && element.findCreditType(moneyType, moneyAmount).length != 0) {
                         for(CreditType creditTypeElement : element.findCreditType(moneyType, moneyAmount)) {
                             System.out.print("Bank \"" + element.getName() + "\" : ");
@@ -154,7 +154,7 @@ public class BankSystem {
                        flag++;
                     }
                 }
-                if(flag == bankList.length) {
+                if(flag == banks.length) {
                     System.out.println("No credits found for your request.");
                 }
             }
@@ -184,10 +184,10 @@ public class BankSystem {
         Currency rub4 = new Currency(4250000, Currency.RUB);
         Currency eur4 = new Currency(450000, Currency.EURO);
         Currency usd4 = new Currency(475000, Currency.USD);
-        Adress adr1 = new Adress("Minsk", "Lenina", 3);
-        Adress adr2 = new Adress("Moscow", "Old Arbat", 12);
-        Adress adr3 = new Adress("London", "Piccadilly", 7);
-        Adress adr4 = new Adress("Berlin", "Unter den Linden", 9);
+        Address adr1 = new Address("Minsk", "Lenina", 3);
+        Address adr2 = new Address("Moscow", "Old Arbat", 12);
+        Address adr3 = new Address("London", "Piccadilly", 7);
+        Address adr4 = new Address("Berlin", "Unter den Linden", 9);
         Bank bank1 = new Bank("Commercial Banking", adr1,
                 LocalDateTime.of(2017, Month.JULY, 9, 12, 0), usd1, eur1, rub1, byn1);
         Bank bank2 = new Bank("Finance", adr2,

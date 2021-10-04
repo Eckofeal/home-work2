@@ -1,5 +1,5 @@
 package bank;
-import adress.Adress;
+import adress.Address;
 import bank.employee.Employee;
 import bank.stock.*;
 import сredit.*;
@@ -16,14 +16,14 @@ public class Bank {
     private Currency rub;
     private Currency byn;
     private String name;
-    private Adress adress;
+    private Address adress;
     private LocalDateTime foundedAt;
     private Stock[] stockList;
     private Employee[] employees;
     private CreditType[] creditTypeList;
     private Credit[] creditList;
 
-    public Bank(String name, Adress adress, LocalDateTime foundedAt) {
+    public Bank(String name, Address adress, LocalDateTime foundedAt) {
         if (!name.isEmpty()) {
             this.name = name;
         }
@@ -36,7 +36,7 @@ public class Bank {
         count++;
     }
 
-    public Bank(String nameOfBank, Adress adress, LocalDateTime whenFounded, Currency usd, Currency eur, Currency rub, Currency byn) {
+    public Bank(String nameOfBank, Address adress, LocalDateTime whenFounded, Currency usd, Currency eur, Currency rub, Currency byn) {
         this(nameOfBank, adress, whenFounded);
         if (usd != null) {
             this.usd = usd;
@@ -62,13 +62,13 @@ public class Bank {
         return name;
     }
 
-    public void setAdress(Adress adress) {
+    public void setAdress(Address adress) {
         if(adress != null) {
             this.adress = adress;
         }
     }
 
-    public Adress getAdress() {
+    public Address getAdress() {
         return adress;
     }
 
@@ -315,7 +315,7 @@ public class Bank {
         System.out.println(byn.getAmount() + " " + Currency.BYN);
     }
 
-    public int indexOfCreditType(CreditType[] creditTypeList, CreditType creditType) {
+    private int indexOfCreditType(CreditType[] creditTypeList, CreditType creditType) {
         int result = -1;
         if(creditTypeList == null) {
             result = -1;
@@ -339,7 +339,7 @@ public class Bank {
         return result;
     }
 
-    public CreditType[] add(CreditType[] creditTypeList, CreditType creditType) {
+    private CreditType[] add(CreditType[] creditTypeList, CreditType creditType) {
         if(creditType == null) {
             return creditTypeList;
         }
@@ -362,7 +362,7 @@ public class Bank {
         return returnList;
     }
 
-    public CreditType[] remove(CreditType[] creditTypeList, CreditType creditType) {
+    private CreditType[] remove(CreditType[] creditTypeList, CreditType creditType) {
         if(creditType == null) {
             return creditTypeList;
         }
@@ -388,7 +388,7 @@ public class Bank {
         return returnList;
     }
 
-    public int indexOfCredit(Credit[] creditList, Credit credit) {
+    private int indexOfCredit(Credit[] creditList, Credit credit) {
         int result = -1;
         if(creditList == null) {
             result = -1;
@@ -412,7 +412,7 @@ public class Bank {
         return result;
     }
 
-    public Credit[] add(Credit[] creditList, Credit credit) {
+    private Credit[] add(Credit[] creditList, Credit credit) {
         if(credit == null) {
             return creditList;
         }
@@ -435,7 +435,7 @@ public class Bank {
         return returnList;
     }
 
-    public Credit[] remove(Credit[] creditList, Credit credit) {
+    private Credit[] remove(Credit[] creditList, Credit credit) {
         if(credit == null) {
             return creditList;
         }
