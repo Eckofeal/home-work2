@@ -106,7 +106,6 @@ public class BankSystem {
         System.out.println("Number types of credits in banks: " + CreditType.count);
         System.out.println("Number of bank clients: " + Client.сount);
     }
-
     //OVERLOADED 3
     public void searchForCreditType(String moneyType) {
         System.out.printf("%-60s%s%s", "\n", "CREDIT SEARCH RESULT:", "\n");
@@ -125,7 +124,6 @@ public class BankSystem {
             System.out.println("No credits found for your request.");
         }
     }
-
     //OVERLOADED 3
     public void searchForCreditType(String moneyType, double moneyAmount) {
         System.out.printf("%-60s%s%s", "\n", "CREDIT SEARCH RESULT:", "\n");
