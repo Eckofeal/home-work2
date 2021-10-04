@@ -22,8 +22,8 @@ public class Bank {
     private LocalDateTime foundedAt;
     private Stock[] stockList;
     private Employee[] employees;
-    private CreditType[] creditTypeList;
-    private Credit[] creditList;
+    private CreditType[] creditTypes;
+    private Credit[] credits;
 
     public Bank(String name, Address adress, LocalDateTime foundedAt) {
         this.name = name;
@@ -112,149 +112,143 @@ public class Bank {
         return employees;
     }
 
-    public void setCreditList(Credit[] creditList) {
-        this.creditList = creditList;
+    public void setCredits(Credit[] credits) {
+        this.credits = credits;
     }
 
-    public Credit[] getCreditList() {
-        return creditList;
+    public Credit[] getCredits() {
+        return credits;
     }
 
-    public void setCreditTypeList(CreditType[] creditTypeList) {
-        this.creditTypeList = creditTypeList;
+    public void setCreditTypes(CreditType[] creditTypes) {
+        this.creditTypes = creditTypes;
     }
 
-    public CreditType[] getCreditTypeList() {
-        return creditTypeList;
+    public CreditType[] getCreditTypes() {
+        return creditTypes;
     }
 
     public void addCreditType(CreditType creditType) {
         if (creditType == null) {
             return;
         }
-        if (creditTypeList != null) {
-            if (indexOfCreditType(creditTypeList, creditType) == -1) {
-                creditTypeList = add(creditTypeList, creditType);
+        if (creditTypes != null) {
+            if (indexOfCreditType(creditTypes, creditType) == -1) {
+                creditTypes = add(creditTypes, creditType);
             } else {
                 System.out.println("Credit type already exist.");
             }
         } else {
-            creditTypeList = add(creditTypeList, creditType);
+            creditTypes = add(creditTypes, creditType);
         }
     }
 
     public void removeCreditType(CreditType creditType) {
-        if (creditType == null) {
+        if (creditType == null || creditTypes == null || creditTypes.length == 0) {
             return;
         }
-        if (creditTypeList == null || creditTypeList.length == 0) {
-            return;
-        }
-        creditTypeList = remove(creditTypeList, creditType);
+        creditTypes = remove(creditTypes, creditType);
     }
 
     //OVERLOADED 1
     public CreditType[] findCreditType(String moneyType) {
-        CreditType[] returnList;
-        if (creditTypeList != null && creditTypeList.length > 0) {
-            returnList = new CreditType[0];
-            for (CreditType element : creditTypeList) {
+        CreditType[] result;
+        if (creditTypes != null && creditTypes.length > 0) {
+            result = new CreditType[0];
+            for (CreditType element : creditTypes) {
                 if (element.getMoneyType() == moneyType) {
-                    returnList = add(returnList, element);
+                    result = add(result, element);
                 }
             }
         } else {
             return null;
         }
-        return returnList;
+        return result;
     }
 
     //OVERLOADED 1
     public CreditType[] findCreditType(String moneyType, double moneyAmount) {
-        CreditType[] returnList;
-        if (creditTypeList != null && creditTypeList.length > 0) {
-            returnList = new CreditType[0];
-            for (CreditType element : creditTypeList) {
+        CreditType[] result;
+        if (creditTypes != null && creditTypes.length > 0) {
+            result = new CreditType[0];
+            for (CreditType element : creditTypes) {
                 if (element.getMoneyType() == moneyType &&
                         (moneyAmount >= element.getMinMoneyAmount() &&
                                 moneyAmount <= element.getMaxMoneyAmount())) {
-                    returnList = add(returnList, element);
+                    result = add(result, element);
                 }
             }
         } else {
             return null;
         }
-        return returnList;
+        return result;
     }
 
     public void addCredit(Credit credit) {
-        if (creditList != null) {
-            if (indexOfCredit(creditList, credit) == -1) {
-                creditList = add(creditList, credit);
+        if (credits != null) {
+            if (indexOfCredit(credits, credit) == -1) {
+                credits = add(credits, credit);
             } else {
                 System.out.println("Credit already exist.");
             }
         } else {
-            creditList = add(creditList, credit);
+            credits = add(credits, credit);
         }
     }
 
     public void removeCredit(Credit credit) {
-        if (credit == null) {
+        if (credit == null || credits == null || credits.length == 0) {
             return;
         }
-        if (creditList == null || creditList.length == 0) {
-            return;
-        }
-        creditList = remove(creditList, credit);
+        credits = remove(credits, credit);
     }
 
     //OVERLOADED 2
     public Credit[] findCredit(Client client) {
-        Credit[] returnList;
+        Credit[] result;
         if (client == null) {
             return null;
         }
-        if (creditList != null && creditList.length > 0) {
-            returnList = new Credit[0];
-            for (Credit element : creditList) {
+        if (credits != null && credits.length > 0) {
+            result = new Credit[0];
+            for (Credit element : credits) {
                 if (element.getClient().getFirstName() == client.getFirstName() &&
                         element.getClient().getLastName() == client.getLastName()) {
-                    returnList = add(returnList, element);
+                    result = add(result, element);
                 }
             }
         } else {
             return null;
         }
-        return returnList;
+        return result;
     }
 
     //OVERLOADED 2
     public Credit[] findCredit(CreditType creditType) {
-        Credit[] returnList;
+        Credit[] result;
         if (creditType == null) {
             return null;
         }
-        if (creditList != null && creditList.length > 0) {
-            returnList = new Credit[0];
-            for (Credit element : creditList) {
+        if (credits != null && credits.length > 0) {
+            result = new Credit[0];
+            for (Credit element : credits) {
                 if (element.getCreditType().getCreditName() == creditType.getCreditName()) {
-                    returnList = add(returnList, element);
+                    result = add(result, element);
                 }
             }
         } else {
             return null;
         }
-        return returnList;
+        return result;
     }
 
     public void printBankInformation() {
         System.out.printf("%-60s%s%s", "\n", "BANK ININFORMATION:", "\n");
-        System.out.println(name + ", located on " + adress.getСity() +
+        System.out.println(name + ", located on " + adress.getCity() +
                 ", " + adress.getStreet() + " " + adress.getHouseNumber() + " street, founded in " +
                 foundedAt.getDayOfMonth() + "." + foundedAt.getMonth() + "." + foundedAt.getYear());
-        System.out.println("Number of credit types in bank: " + creditTypeList.length);
-        System.out.println("Number of credits issued: " + creditList.length);
+        System.out.println("Number of credit types in bank: " + creditTypes.length);
+        System.out.println("Number of credits issued: " + credits.length);
         System.out.println("Bank capital:");
         System.out.println(usd.getAmount() + " " + Currency.USD);
         System.out.println(eur.getAmount() + " " + Currency.EURO);
@@ -262,18 +256,18 @@ public class Bank {
         System.out.println(byn.getAmount() + " " + Currency.BYN);
     }
 
-    private int indexOfCreditType(CreditType[] creditTypeList, CreditType creditType) {
+    private int indexOfCreditType(CreditType[] creditTypes, CreditType creditType) {
         int result = -1;
-        if (creditTypeList.length != 0) {
+        if (creditTypes.length != 0) {
             int flag = 0;
-            for (int i = 0; i < creditTypeList.length; i++) {
+            for (int i = 0; i < creditTypes.length; i++) {
                 flag++;
-                if (creditTypeList[i].equals(creditType)) {
+                if (creditTypes[i].equals(creditType)) {
                     result = i;
                     return result;
                 }
             }
-            if (flag == creditTypeList.length) {
+            if (flag == creditTypes.length) {
                 result = -1;
             }
         } else {
@@ -282,32 +276,32 @@ public class Bank {
         return result;
     }
 
-    private CreditType[] add(CreditType[] creditTypeList, CreditType creditType) {
+    private CreditType[] add(CreditType[] creditTypes, CreditType creditType) {
         if (creditType == null) {
-            return creditTypeList;
+            return creditTypes;
         }
-        CreditType[] returnList;
-        if (creditTypeList == null) {
-            returnList = new CreditType[1];
-            returnList[0] = creditType;
+        CreditType[] result;
+        if (creditTypes == null) {
+            result = new CreditType[1];
+            result[0] = creditType;
         } else {
-            returnList = new CreditType[creditTypeList.length + 1];
-            returnList = copyThenInsert(creditTypeList, returnList, creditType);
+            result = new CreditType[creditTypes.length + 1];
+            result = copyThenInsert(creditTypes, result, creditType);
         }
-        return returnList;
+        return result;
     }
 
-    private CreditType[] remove(CreditType[] creditTypeList, CreditType creditType) {
-        CreditType[] returnList = new CreditType[creditTypeList.length - 1];
-        int index = indexOfCreditType(creditTypeList, creditType);
-        for (int i = 0, j = 0; i < creditTypeList.length; i++, j++) {
+    private CreditType[] remove(CreditType[] creditTypes, CreditType creditType) {
+        CreditType[] result = new CreditType[creditTypes.length - 1];
+        int index = indexOfCreditType(creditTypes, creditType);
+        for (int i = 0, j = 0; i < creditTypes.length; i++, j++) {
             if (i == index) {
                 j--;
             } else {
-                returnList[j] = creditTypeList[i];
+                result[j] = creditTypes[i];
             }
         }
-        return returnList;
+        return result;
     }
 
     private CreditType[] copyThenInsert(CreditType[] copyThis, CreditType[] intoThis, CreditType thenInsertThis) {
@@ -321,18 +315,18 @@ public class Bank {
         return intoThis;
     }
 
-    private int indexOfCredit(Credit[] creditList, Credit credit) {
+    private int indexOfCredit(Credit[] credits, Credit credit) {
         int result = -1;
-        if (creditList.length != 0) {
+        if (credits.length != 0) {
             int flag = 0;
-            for (int i = 0; i < creditList.length; i++) {
+            for (int i = 0; i < credits.length; i++) {
                 flag++;
-                if (creditList[i].equals(credit)) {
+                if (credits[i].equals(credit)) {
                     result = i;
                     return result;
                 }
             }
-            if (flag == creditList.length) {
+            if (flag == credits.length) {
                 result = -1;
             }
         } else {
@@ -341,32 +335,32 @@ public class Bank {
         return result;
     }
 
-    private Credit[] add(Credit[] creditList, Credit credit) {
+    private Credit[] add(Credit[] credits, Credit credit) {
         if (credit == null) {
-            return creditList;
+            return credits;
         }
-        Credit[] returnList;
-        if (creditList == null) {
-            returnList = new Credit[1];
-            returnList[0] = credit;
+        Credit[] result;
+        if (credits == null) {
+            result = new Credit[1];
+            result[0] = credit;
         } else {
-            returnList = new Credit[creditList.length + 1];
-            returnList = copyThenInsert(creditList, returnList, credit);
+            result = new Credit[credits.length + 1];
+            result = copyThenInsert(credits, result, credit);
         }
-        return returnList;
+        return result;
     }
 
-    private Credit[] remove(Credit[] creditList, Credit credit) {
-        Credit[] returnList = new Credit[creditList.length - 1];
-        int index = indexOfCredit(creditList, credit);
-        for (int i = 0, j = 0; i < creditList.length; i++, j++) {
+    private Credit[] remove(Credit[] credits, Credit credit) {
+        Credit[] result = new Credit[credits.length - 1];
+        int index = indexOfCredit(credits, credit);
+        for (int i = 0, j = 0; i < credits.length; i++, j++) {
             if (i == index) {
                 j--;
             } else {
-                returnList[j] = creditList[i];
+                result[j] = credits[i];
             }
         }
-        return returnList;
+        return result;
     }
 
     private Credit[] copyThenInsert(Credit[] copyThis, Credit[] intoThis, Credit thenInsertThis) {

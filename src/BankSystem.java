@@ -101,7 +101,7 @@ public class BankSystem {
     public static void info() {
         System.out.printf("%-60s%s%s", "\n", "BANK SYSTEM INFORMATION:", "\n");
         System.out.println("Number of banks in system: " + Bank.count);
-        System.out.println("Number of employees: " + Employee.сount);
+        System.out.println("Number of employees: " + Employee.count);
         System.out.println("Credits issued: " + Credit.сount);
         System.out.println("Number types of credits in banks: " + CreditType.count);
         System.out.println("Number of bank clients: " + Client.сount);

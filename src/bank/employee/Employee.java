@@ -1,14 +1,11 @@
 package bank.employee;
-
 import bank.currency.Currency;
-import work.Work;
-
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class Employee {
 
-    public static int сount = 0;
+    public static int count = 0;
 
     private String firstName;
     private String lastName;
@@ -27,7 +24,7 @@ public class Employee {
         }
         this.position = position;
         this.salary = salary;
-        сount++;
+        count++;
     }
 
     public void setFirstName(String firstName) {

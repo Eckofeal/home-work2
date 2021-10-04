@@ -2,22 +2,22 @@ package address;
 
 public class Address {
 
-    private String сity;
+    private String city;
     private String street;
     private int houseNumber;
 
     public Address(String сity, String street, int houseNumber) {
         this.houseNumber = houseNumber;
         this.street = street;
-        this.сity = сity;
+        this.city = сity;
     }
 
-    public String getСity() {
-        return сity;
+    public String getCity() {
+        return city;
     }
 
-    public void setСity(String сity) {
-        this.сity = сity;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getStreet() {
