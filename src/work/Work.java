@@ -8,24 +8,16 @@ public class Work {
     private String moneyType;
 
     public Work(String companyName, String positionName, int salary, String moneyType) {
-        if (!companyName.isEmpty()) {
-            this.companyName = companyName;
-        }
-        if (!positionName.isEmpty()) {
-            this.positionName = positionName;
-        }
+        this.companyName = companyName;
+        this.positionName = positionName;
         if (salary > 0) {
             this.salary = salary;
         }
-        if(!moneyType.isEmpty()) {
-            this.moneyType = moneyType;
-        }
+        this.moneyType = moneyType;
     }
 
     public void setCompanyName(String companyName) {
-        if (!companyName.isEmpty()) {
-            this.companyName = companyName;
-        }
+        this.companyName = companyName;
     }
 
     public String getCompanyName() {
@@ -33,9 +25,7 @@ public class Work {
     }
 
     public void setPositionName(String positionName) {
-        if (!positionName.isEmpty()) {
-            this.positionName = positionName;
-        }
+        this.positionName = positionName;
     }
 
     public String getPositionName() {
@@ -53,9 +43,7 @@ public class Work {
     }
 
     public void setMoneyType(String moneyType) {
-        if(moneyType.isEmpty()) {
-            this.moneyType = moneyType;
-        }
+        this.moneyType = moneyType;
     }
 
     public String getMoneyType() {
