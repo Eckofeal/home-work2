@@ -20,12 +20,8 @@ public class Credit {
     private Date whenExpired;
 
     public Credit(Client client, CreditType creditType, double moneyAmount) {
-        if(client != null) {
-            this.client = client;
-        }
-        if(creditType != null) {
-            this.creditType = creditType;
-        }
+        this.client = client;
+        this.creditType = creditType;
         if(moneyAmount > creditType.getMinMoneyAmount() && moneyAmount < creditType.getMaxMoneyAmount()) {
             givenMoneyAmount = moneyAmount;
             backMoneyAmount = givenMoneyAmount + (givenMoneyAmount * creditType.getTermInYears() * (creditType.getYearPercent()/100));

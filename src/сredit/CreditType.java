@@ -13,29 +13,17 @@ public class CreditType {
 
     public CreditType(String creditName, String moneyType, int termInYears,
                       double yearPercent, double minMoneyAmount, double maxMoneyAmount) {
-        if(!creditName.isEmpty()) {
-            this.creditName = creditName;
-        }
-        if(!moneyType.isEmpty()) {
-            this.moneyType = moneyType;
-        }
+        this.creditName = creditName;
+        this.moneyType = moneyType;
         this.yearPercent = yearPercent;
-        if(termInYears > 0) {
-            this.termInYears = termInYears;
-        }
-        if(minMoneyAmount > 0) {
-            this.minMoneyAmount = minMoneyAmount;
-        }
-        if(maxMoneyAmount > 0) {
-            this.maxMoneyAmount = maxMoneyAmount;
-        }
+        this.termInYears = termInYears;
+        this.minMoneyAmount = minMoneyAmount;
+        this.maxMoneyAmount = maxMoneyAmount;
         count++;
     }
 
     public void setCreditName(String creditName) {
-        if(!creditName.isEmpty()) {
-            this.creditName = creditName;
-        }
+        this.creditName = creditName;
     }
 
     public String getCreditName() {
@@ -43,9 +31,7 @@ public class CreditType {
     }
 
     public void setMoneyType(String moneyType) {
-        if(!moneyType.isEmpty()) {
-            this.moneyType = moneyType;
-        }
+        this.moneyType = moneyType;
     }
 
     public String getMoneyType() {
@@ -53,9 +39,7 @@ public class CreditType {
     }
 
     public void setTermInYears(int termInYears) {
-        if(termInYears > 0) {
-            this.termInYears = termInYears;
-        }
+        this.termInYears = termInYears;
     }
 
     public int getTermInYears() {

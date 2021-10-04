@@ -11,12 +11,11 @@ public class Currency {
     private double amount;
 
     public Currency(double moneyAmount, String moneyType) {
-        if(moneyAmount != 0) {
             this.amount = moneyAmount;
-        }
+            this.type = moneyType;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(double moneyAmount) {
         this.amount = amount;
     }
 
@@ -24,10 +23,8 @@ public class Currency {
         return amount;
     }
 
-    public void setType(String type) {
-        if(!type.isEmpty()) {
-            this.type = type;
-        }
+    public void setType(String moneyType) {
+            this.type = moneyType;
     }
 
     public String getType() {

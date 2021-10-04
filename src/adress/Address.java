@@ -6,15 +6,9 @@ public class Address {
     private int houseNumber;
 
     public Address(String sity, String street, int houseNumber) {
-        if(houseNumber > 0) {
-            this.houseNumber = houseNumber;
-        }
-        if(!street.isEmpty()) {
-            this.street = street;
-        }
-        if(!sity.isEmpty()) {
-            this.sity = sity;
-        }
+        this.houseNumber = houseNumber;
+        this.street = street;
+        this.sity = sity;
     }
 
     public String getSity() {
@@ -22,9 +16,7 @@ public class Address {
     }
 
     public void setSity(String sity) {
-        if(!sity.isEmpty()) {
-            this.sity = sity;
-        }
+        this.sity = sity;
     }
 
     public String getStreet() {
@@ -32,9 +24,7 @@ public class Address {
     }
 
     public void setStreet(String street) {
-        if(!street.isEmpty()) {
-            this.street = street;
-        }
+        this.street = street;
     }
 
     public int getHouseNumber() {
@@ -42,8 +32,6 @@ public class Address {
     }
 
     public void setHouseNumber(int houseNumber) {
-        if(houseNumber > 0) {
-            this.houseNumber = houseNumber;
-        }
+        this.houseNumber = houseNumber;
     }
 }

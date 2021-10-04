@@ -17,32 +17,20 @@ public class Employee {
     private String position;
 
     public Employee(String firstName, String lastName, LocalDateTime birthDay, String position, Currency salary) {
-        if(!firstName.isEmpty()) {
-            this.firstName = firstName;
-        }
-        if(!lastName.isEmpty()) {
-            this.lastName = lastName;
-        }
-        if(birthDay != null) {
-            this.birthday = birthDay;
-        }
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthDay;
         int age = (int) ChronoUnit.YEARS.between(this.birthday, LocalDateTime.now());
-        if(age > 0 && age < 150) {
+        if(age > 18 && age < 150) {
             this.age = age;
         }
-        if(!position.isEmpty()) {
-            this.position = position;
-        }
-        if(salary != null) {
-            this.salary = salary;
-        }
+        this.position = position;
+        this.salary = salary;
         сount++;
     }
 
     public void setFirstName(String firstName) {
-        if(!firstName.isEmpty()) {
-            this.firstName = firstName;
-        }
+        this.firstName = firstName;
     }
 
     public String getFirstName() {
@@ -50,9 +38,7 @@ public class Employee {
     }
 
     public void setLastName(String lastName) {
-        if(!lastName.isEmpty()) {
-            this.lastName = lastName;
-        }
+        this.lastName = lastName;
     }
 
     public String getLastName() {
@@ -60,7 +46,7 @@ public class Employee {
     }
 
     public void setAge(int age) {
-        if(age > 0 && age < 150) {
+        if(age > 18 && age < 150) {
             this.age = age;
         }
     }
@@ -70,9 +56,7 @@ public class Employee {
     }
 
     public void setBirthday(LocalDateTime birthday) {
-        if(birthday != null) {
             this.birthday = birthday;
-        }
     }
 
     public LocalDateTime getBirthday() {
@@ -80,9 +64,7 @@ public class Employee {
     }
 
     public void setSalary(Currency salary) {
-        if(salary != null) {
             this.salary = salary;
-        }
     }
 
     public Currency getSalary() {
@@ -90,9 +72,7 @@ public class Employee {
     }
 
     public void setPosition(String position) {
-        if(position.isEmpty()) {
             this.position = position;
-        }
     }
 
     public String getPosition() {

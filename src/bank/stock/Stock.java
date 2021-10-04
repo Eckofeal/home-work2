@@ -8,21 +8,13 @@ public class Stock {
     private Currency costPerStock;
 
     public Stock(String companyName, long stockNumber, Currency costPerShare) {
-        if(!companyName.isEmpty()) {
-            this.companyName = companyName;
-        }
-        if(stockNumber >= 0) {
-            this.stockNumber = stockNumber;
-        }
-        if(costPerShare != null) {
-            this.costPerStock = costPerShare;
-        }
+        this.companyName = companyName;
+        this.stockNumber = stockNumber;
+        this.costPerStock = costPerShare;
     }
 
     public void setCompanyName(String companyName) {
-        if(!companyName.isEmpty()) {
-            this.companyName = companyName;
-        }
+        this.companyName = companyName;
     }
 
     public String getCompanyName() {
@@ -30,9 +22,7 @@ public class Stock {
     }
 
     public void setSharesNumber(long stockNumber) {
-        if(stockNumber >= 0) {
-            this.stockNumber = stockNumber;
-        }
+        this.stockNumber = stockNumber;
     }
 
     public long getSharesNumber() {
@@ -40,9 +30,7 @@ public class Stock {
     }
 
     public void setCostPerStock(Currency costPerStock) {
-        if(costPerStock != null) {
-            this.costPerStock = costPerStock;
-        }
+        this.costPerStock = costPerStock;
     }
 
     public Currency getCostPerStock() {
