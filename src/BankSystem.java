@@ -1,4 +1,4 @@
-import adress.Address;
+import address.Address;
 import bank.*;
 import bank.currency.Currency;
 import bank.employee.Employee;

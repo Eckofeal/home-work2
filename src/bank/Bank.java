@@ -1,6 +1,6 @@
 package bank;
 
-import adress.Address;
+import address.Address;
 import bank.employee.Employee;
 import bank.stock.*;
 import сredit.*;
@@ -254,7 +254,7 @@ public class Bank {
 
     public void printBankInformation() {
         System.out.printf("%-60s%s%s", "\n", "BANK ININFORMATION:", "\n");
-        System.out.println(name + ", located on " + adress.getSity() +
+        System.out.println(name + ", located on " + adress.getСity() +
                 ", " + adress.getStreet() + " " + adress.getHouseNumber() + " street, founded in " +
                 foundedAt.getDayOfMonth() + "." + foundedAt.getMonth() + "." + foundedAt.getYear());
         System.out.println("Number of credit types in bank: " + creditTypeList.length);
